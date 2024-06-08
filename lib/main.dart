@@ -16,7 +16,7 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
-      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+      // theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
     );
   }
 }

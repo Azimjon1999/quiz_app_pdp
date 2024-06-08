@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                   setState((){});
 
                   try {
-                    await user.updateDisplayName("${firstNameController.text}/split/${lastNameController.text}");
+                    await user.updateDisplayName("${firstNameController.text.trim()}/split/${lastNameController.text.trim()}");
                     await user.reload();
                   } catch(e) {
                     if(context.mounted) errorSnackBar(context);
