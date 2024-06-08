@@ -5,7 +5,7 @@ import 'package:quiz_app_pdp/presentations/pages/auth/otp.dart';
 import 'package:quiz_app_pdp/presentations/pages/auth/signup.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary/primary.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/analytics.dart';
-import 'package:quiz_app_pdp/presentations/pages/primary_pages/home.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_view.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/profile.dart';
 import 'package:quiz_app_pdp/presentations/pages/splash_screen.dart';
 

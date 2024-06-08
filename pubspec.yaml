@@ -32,7 +32,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/lottie/
-    - assets/fonts
+    - assets/fonts/
 
   fonts:
     - family: "Poppins"
