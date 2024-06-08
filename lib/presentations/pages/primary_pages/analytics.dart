@@ -11,7 +11,7 @@ class _AnalyticsState extends State<Analytics> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: Center(
         child: Text("Analytics"),
       ),

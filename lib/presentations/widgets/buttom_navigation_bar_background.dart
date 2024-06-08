@@ -6,17 +6,30 @@ class BottomNavigationBarBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: BottomNavigationBarBackgroundClipper(),
-      child: Container(
-        width: double.infinity,
-        height: 85,
-        color: Colors.white,
-        child: Transform.translate(
-          offset: const Offset(0, -8),
-          child: child,
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        ClipPath(
+          clipper: BottomNavigationBarBackgroundClipper(),
+          child: Container(
+            height: 86,
+            width: double.infinity,
+            color: Colors.grey.withOpacity(0.2),
+          ),
         ),
-      ),
+        ClipPath(
+          clipper: BottomNavigationBarBackgroundClipper(),
+          child: Container(
+            height: 85,
+            width: double.infinity,
+            color: Colors.white,
+            child: Transform.translate(
+              offset: const Offset(0, -8),
+              child: child,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
