@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "614160463111",
+    "project_id": "quiz-app-pdp",
+    "storage_bucket": "quiz-app-pdp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614160463111:android:66d8a1a39a16d7a488c1a2",
+        "android_client_info": {
+          "package_name": "com.example.quiz_app_pdp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdH9YXN6gmXl4VksL6tI1p1AVUwI_MknA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
