@@ -56,7 +56,8 @@ class FirebaseAuthService {
               CustomLotties.noWifi
           )
       );
-    } else if(exception.code == FirebaseExceptions.tooManyRequests) {
+    }
+    else if(exception.code == FirebaseExceptions.tooManyRequests) {
       CommonAlertDialog(
           context: context,
           contentText: "Urinishlar soni ko'payib ketti. Iltimos keyinroq urinib ko'ring",

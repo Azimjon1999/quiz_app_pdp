@@ -72,7 +72,6 @@ class _RegisterState extends State<Register> {
               onPressed: () async {
                 if(isLoading) return;
                 if(!formKey.currentState!.validate()) return;
-
                 await FirebaseAuthService.firebaseVerifyPhoneNumber(
                   context: context,
                   phoneNumber: phoneNumberController.text,
