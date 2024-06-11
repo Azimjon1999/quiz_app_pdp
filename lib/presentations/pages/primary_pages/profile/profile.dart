@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_app_pdp/core/constants/app_colors.dart';
 import 'package:quiz_app_pdp/presentations/widgets/common_button.dart';
 import 'package:quiz_app_pdp/presentations/widgets/common_text_field.dart';
 import 'package:quiz_app_pdp/presentations/widgets/svg_icon.dart';
