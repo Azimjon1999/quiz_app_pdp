@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: HomeAppBar(),
       body: Padding(
-        padding: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.only(top: 20),
         child: GridView.builder(
           itemCount: quizApp.technologies.length,
           padding: const EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 90),

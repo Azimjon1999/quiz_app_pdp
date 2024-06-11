@@ -6,9 +6,10 @@ import 'package:quiz_app_pdp/presentations/pages/auth/otp.dart';
 import 'package:quiz_app_pdp/presentations/pages/auth/signup.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_detail/home_detail_view.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary/primary.dart';
-import 'package:quiz_app_pdp/presentations/pages/primary_pages/level.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/level/level.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_view.dart';
-import 'package:quiz_app_pdp/presentations/pages/primary_pages/profile.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/level/level_deteil_page.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/profile/profile.dart';
 import 'package:quiz_app_pdp/presentations/pages/splash_screen.dart';
 
 import '../../presentations/pages/auth/register.dart';
@@ -50,6 +51,12 @@ final class AppRouter {
           GoRoute(
             path: AppRouterName.level,
             builder: (context, state) => const Level(),
+            routes: [
+              GoRoute(
+                  path: AppRouterName.levelDetail,
+                builder: (context,state)=>const LevelDetailPage(),
+              )
+            ]
           ),
           GoRoute(
             path: AppRouterName.profile,

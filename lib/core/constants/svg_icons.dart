@@ -16,4 +16,5 @@ sealed class SvgIcons {
   static const String ios = "assets/icons/ios.svg";
   static const String java = "assets/icons/java.svg";
   static const String python = "assets/icons/python.svg";
+  static const String profilePageIcon = "assets/icons/profile_page_icon.svg";
 }
