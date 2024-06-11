@@ -37,7 +37,7 @@ final class AppRouter {
                     routes: [
                       GoRoute(
                         path: AppRouterName.testPage,
-                        builder: (context, state) => TestPage(
+                        builder: (context, state) => TestMainPage(
                           svgPath: (state.extra as Map<String, dynamic>)["svgPath"] as String,
                           category: (state.extra as Map<String, dynamic>)["category"] as Category,
                         ),

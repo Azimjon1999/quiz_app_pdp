@@ -9,6 +9,8 @@ class CommonButton extends StatelessWidget {
   final double? borderRadius;
   final bool? isLoading;
   final Color? progressIndicatorColor;
+  final BorderSide? side;
+  final TextStyle? textStyle;
 
   const CommonButton({
     required this.onPressed,
@@ -18,6 +20,8 @@ class CommonButton extends StatelessWidget {
     this.borderRadius,
     this.isLoading,
     this.progressIndicatorColor,
+    this.side,
+    this.textStyle,
     super.key
   });
 
@@ -31,12 +35,13 @@ class CommonButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? AppColors.primaryGreen,
           shape: RoundedRectangleBorder(
+            side: side ?? BorderSide.none,
             borderRadius: BorderRadius.circular(borderRadius ?? 12)
           )
         ),
         child: !(isLoading ?? false) ? Text(text,
-          style: TextStyle(
-            color: color ?? Colors.white,
+          style: textStyle ?? const TextStyle(
+            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 16
           ),
