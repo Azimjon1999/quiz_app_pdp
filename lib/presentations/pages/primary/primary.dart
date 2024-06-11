@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_app_pdp/core/router/app_router_name.dart';
 import '../../../core/constants/svg_icons.dart';
-import '../../widgets/buttom_navigation_bar_background.dart';
+import 'buttom_navigation_bar_background.dart';
 import '../../widgets/svg_icon.dart';
 import 'navigation_bar_item.dart';
 
@@ -16,7 +16,6 @@ class Primary extends StatefulWidget {
 }
 
 class PrimaryState extends State<Primary> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

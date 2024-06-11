@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_pdp/models/quiz_app_model.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_app_bar.dart';
-import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_box_list.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_box.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final QuizApp quizApp = QuizApp.instance;
+  Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,8 @@ class Home extends StatelessWidget {
       appBar: HomeAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 15),
-        child: GridView(
+        child: GridView.builder(
+          itemCount: quizApp.technologies.length,
           padding: const EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 90),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -20,7 +23,7 @@ class Home extends StatelessWidget {
             crossAxisSpacing: 30,
             mainAxisExtent: 160
           ),
-          children: homeBoxList,
+          itemBuilder: (context, index) => HomeBox(technology: quizApp.technologies[index]),
         ),
       ),
     );

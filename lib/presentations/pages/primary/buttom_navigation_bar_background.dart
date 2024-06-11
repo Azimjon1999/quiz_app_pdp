@@ -13,7 +13,6 @@ class BottomNavigationBarBackground extends StatelessWidget {
           clipper: BottomNavigationBarBackgroundClipper(),
           child: Container(
             height: 86,
-            width: double.infinity,
             color: Colors.grey.withOpacity(0.2),
           ),
         ),
@@ -21,7 +20,6 @@ class BottomNavigationBarBackground extends StatelessWidget {
           clipper: BottomNavigationBarBackgroundClipper(),
           child: Container(
             height: 85,
-            width: double.infinity,
             color: Colors.white,
             child: Transform.translate(
               offset: const Offset(0, -8),

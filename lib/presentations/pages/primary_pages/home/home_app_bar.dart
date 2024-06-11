@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/svg_icon.dart';
@@ -20,13 +21,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Hello ${user?.displayName?.split("/split/")[0]}",
-                style: const TextStyle(
+              Expanded(
+                child: Text(
+                  "Hello ${user?.displayName?.split("/split/")[0]}",
+                  style: const TextStyle(
                     color: Color(0xff000000),
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
                     fontFamily: "Poppins"
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const CircleAvatar(
