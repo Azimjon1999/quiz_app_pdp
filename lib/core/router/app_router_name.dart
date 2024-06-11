@@ -15,8 +15,8 @@ final class AppRouterName {
   static const String chooseOneSteps = "chooseOneSteps";
   static const String testPage = "testPage";
 
-  /// analytics
-  static const String analytics = "/analytics";
+  /// level
+  static const String level = "/level";
 
   /// profile
   static const String profile = "/profile";

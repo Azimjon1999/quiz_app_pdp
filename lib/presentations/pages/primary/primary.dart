@@ -33,7 +33,7 @@ class PrimaryState extends State<Primary> {
                   index == 0
                     ? AppRouterName.home
                     : index == 1
-                    ? AppRouterName.analytics
+                    ? AppRouterName.level
                     : AppRouterName.profile
                 );
               },

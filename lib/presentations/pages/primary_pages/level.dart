@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Analytics extends StatefulWidget {
-  const Analytics({super.key});
+class Level extends StatefulWidget {
+  const Level({super.key});
 
   @override
-  State<Analytics> createState() => _AnalyticsState();
+  State<Level> createState() => _LevelState();
 }
 
-class _AnalyticsState extends State<Analytics> {
+class _LevelState extends State<Level> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text("Analytics"),
+        child: Text("Level"),
       ),
     );
   }

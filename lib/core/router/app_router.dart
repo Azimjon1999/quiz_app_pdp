@@ -6,7 +6,7 @@ import 'package:quiz_app_pdp/presentations/pages/auth/otp.dart';
 import 'package:quiz_app_pdp/presentations/pages/auth/signup.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_detail/home_detail_view.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary/primary.dart';
-import 'package:quiz_app_pdp/presentations/pages/primary_pages/analytics.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/level.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_view.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/profile.dart';
 import 'package:quiz_app_pdp/presentations/pages/splash_screen.dart';
@@ -45,33 +45,11 @@ final class AppRouter {
                   ),
                 ]
               ),
-              // GoRoute(
-              //   path: AppRouterName.homeDetail,
-              //   builder: (context, state) => HomeDetail(state.extra as Technology),
-              //   routes: [
-              //     GoRoute(
-              //       path: AppRouterName.chooseOneSteps,
-              //       builder: (context, state) => ChooseOneSteps(
-              //         svgPath: (state.extra as Map<String, dynamic>)["svgPath"] as String,
-              //         department: (state.extra as Map<String, dynamic>)["department"] as Category,
-              //       ),
-              //       routes: [
-              //         GoRoute(
-              //           path: AppRouterName.testPage,
-              //           builder: (context, state) => TestPage(
-              //             svgPath: (state.extra as Map<String, dynamic>)["svgPath"] as String,
-              //             department: (state.extra as Map<String, dynamic>)["department"] as Category,
-              //           ),
-              //         ),
-              //       ]
-              //     ),
-              //   ]
-              // ),
             ]
           ),
           GoRoute(
-            path: AppRouterName.analytics,
-            builder: (context, state) => const Analytics(),
+            path: AppRouterName.level,
+            builder: (context, state) => const Level(),
           ),
           GoRoute(
             path: AppRouterName.profile,
