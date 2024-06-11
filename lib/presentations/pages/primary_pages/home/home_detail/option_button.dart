@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app_pdp/core/constants/app_colors.dart';
 
 class OptionButton extends StatefulWidget {
-  final bool? Function() choose;
-  final String text;
+  final void Function() onPressed;
+  final OptionStyle style;
   final String option;
 
   const OptionButton({
-    required this.choose,
-    required this.text,
+    required this.onPressed,
+    required this.style,
     required this.option,
     super.key
   });
@@ -26,41 +25,30 @@ class _OptionButtonState extends State<OptionButton> {
       height: 54,
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {
-          if(correct != null) return;
-          correct = widget.choose();
-          setState(() {});
-        },
+        onPressed: widget.onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: correct == null
-              ? Colors.white
-              : correct == true
-              ? AppColors.primaryGreen
-              : Colors.red,
-          // backgroundColor: correct == null ? Colors.white
-          //     : (correct == true ? AppColors.primaryGreen : Colors.red),
-
-          side: correct == null ? const BorderSide(
+          backgroundColor: widget.style.backgroundColor,
+          side: widget.style.borderColor != null ? BorderSide(
             width: 1,
-            color: AppColors.primaryGreen
+            color: widget.style.borderColor!
           ) : null,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12)
-          )
+            shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)
+              )
         ),
         child: Align(
           alignment: Alignment.centerLeft,
           child: RichText(
             text: TextSpan(
-              text: "${widget.option}. ",
+              text: "A. ",
               style: TextStyle(
-                color: correct == null ? Colors.black : Colors.white,
+                color: widget.style.textColor,
                 fontWeight: FontWeight.w600,
                 fontSize: 16
               ),
               children: [
                 TextSpan(
-                  text: widget.text,
+                  text: widget.option,
                   style: const TextStyle(fontWeight: FontWeight.w400),
                 )
               ]
@@ -72,4 +60,17 @@ class _OptionButtonState extends State<OptionButton> {
       ),
     );
   }
+}
+
+
+class OptionStyle {
+  Color? borderColor;
+  Color backgroundColor;
+  Color textColor;
+
+  OptionStyle({
+    required this.borderColor,
+    required this.backgroundColor,
+    required this.textColor
+  });
 }
