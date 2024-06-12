@@ -32,15 +32,15 @@ class _OptionButtonState extends State<OptionButton> {
             width: 1,
             color: widget.style.borderColor!
           ) : null,
-            shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)
-              )
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)
+          )
         ),
         child: Align(
           alignment: Alignment.centerLeft,
           child: RichText(
             text: TextSpan(
-              text: "A. ",
+              text: widget.option.substring(0, 3),
               style: TextStyle(
                 color: widget.style.textColor,
                 fontWeight: FontWeight.w600,
@@ -48,7 +48,7 @@ class _OptionButtonState extends State<OptionButton> {
               ),
               children: [
                 TextSpan(
-                  text: widget.option,
+                  text: widget.option.substring(3),
                   style: const TextStyle(fontWeight: FontWeight.w400),
                 )
               ]

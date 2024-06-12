@@ -1,4 +1,3 @@
-import 'package:flutter_svg/svg.dart';
 import 'package:quiz_app_pdp/core/constants/svg_icons.dart';
 
 class Data {
@@ -41,79 +40,6 @@ class Data {
               option1: "const",
               option2: "final",
               option3: "var",
-            ),
-            Question(
-              question: "Which widget is used to create a button in Flutter?",
-              answer: "ElevatedButton",
-              option1: "Container",
-              option2: "Column",
-              option3: "ElevatedButton",
-            ),
-            Question(
-              question:
-                  "Which method is used to rebuild the UI in a StatefulWidget?",
-              answer: "setState",
-              option1: "initState",
-              option2: "setState",
-              option3: "build",
-            ),
-            Question(
-              question: "Which widget is used for layout in Flutter?",
-              answer: "Scaffold",
-              option1: "Text",
-              option2: "Scaffold",
-              option3: "Container",
-            ),
-            Question(
-              question: "How do you display a scrollable list in Flutter?",
-              answer: "ListView",
-              option1: "ListView",
-              option2: "GridView",
-              option3: "Column",
-            ),
-            Question(
-              question:
-                  "Which method is used to fetch data when a StatefulWidget is created?",
-              answer: "initState",
-              option1: "setState",
-              option2: "initState",
-              option3: "dispose",
-            ),
-            Question(
-              question: "What is the command to create a new Flutter project?",
-              answer: "flutter create project_name",
-              option1: "flutter start project_name",
-              option2: "flutter create project_name",
-              option3: "flutter new project_name",
-            ),
-            Question(
-              question: "What does the `build` method do in Flutter?",
-              answer: "Describes how to display the widget",
-              option1: "Initializes the app",
-              option2: "Fetches data",
-              option3: "Describes how to display the widget",
-            ),
-            Question(
-              question: "Which widget is used to arrange widgets vertically?",
-              answer: "Column",
-              option1: "Row",
-              option2: "Column",
-              option3: "Stack",
-            ),
-            Question(
-              question: "What is the purpose of the `pubspec.yaml` file?",
-              answer: "To manage the app’s dependencies",
-              option1: "To define the app’s layout",
-              option2: "To manage the app’s dependencies",
-              option3: "To handle user inputs",
-            ),
-            Question(
-              question:
-                  "Which method is called when a StatefulWidget is removed from the widget tree?",
-              answer: "dispose",
-              option1: "dispose",
-              option2: "deactivate",
-              option3: "remove",
             ),
           ]),
       Category(
