@@ -26,9 +26,7 @@ class _LevelState extends State<Level> {
           itemCount: 8,
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 86) ,
           itemBuilder: (context, index) => InkWell(
-            onTap: (){
-              context.go(AppRouterName.level.childRoute(AppRouterName.levelDetail));
-            },
+            onTap: () => context.go(AppRouterName.level.childRoute(AppRouterName.levelDetail)),
             child: Container(
               height: 70,
               width: double.infinity,
@@ -50,7 +48,7 @@ class _LevelState extends State<Level> {
                     ),
                   ),
                   SizedBox(width: 150,),
-                  Text("10/6",
+                  Text("9/6",
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,

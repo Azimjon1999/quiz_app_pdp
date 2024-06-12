@@ -1,14 +1,31 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../services/sorage_service.dart';
 import '../../../widgets/svg_icon.dart';
 
-// ignore: must_be_immutable
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  HomeAppBar({super.key});
+class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const HomeAppBar({super.key});
 
+  @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(80);
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
   User? user = FirebaseAuth.instance.currentUser;
+  String? profileImagePath;
+
+  @override
+  void initState() {
+    super.initState();
+    profileImagePath = StorageService.get(StorageKey.profileImagePath);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +51,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 23,
                 backgroundColor: Colors.transparent,
-                child: SvgIcon(SvgIcons.profile, width: 46, height: 46),
+                foregroundImage: profileImagePath != null ? Image.file(File(profileImagePath!)).image : null,
+                child: profileImagePath == null ? const SvgIcon(SvgIcons.profile, width: 46, height: 46) : null,
               )
             ],
           ),
@@ -45,7 +63,4 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(80);
 }

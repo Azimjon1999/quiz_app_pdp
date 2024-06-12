@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app_pdp/presentations/widgets/svg_icon.dart';
 
@@ -35,10 +36,10 @@ final double fontSize = 7;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar:   AppBar(
-        centerTitle: true,
-        title: const Padding(
-          padding: EdgeInsets.only(top: 40.0), // Yuqori chetni sozlash
+      appBar:   const PreferredSize(
+        preferredSize: Size.fromHeight(150),
+      child: Padding(
+          padding: EdgeInsets.only(top: 40.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -54,14 +55,9 @@ final double fontSize = 7;
             ],
           ),
         ),
-        backgroundColor: Colors.white,
       ),
-
-
-
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20,),
-
         child: Container(
           color: const Color(0xffF5F5F5),
           child: ListView.builder(
@@ -84,17 +80,14 @@ final double fontSize = 7;
                               fontWeight: FontWeight.w400,
                               fontFamily: "Port Lligat Slab"),
                         ),
-                        const SizedBox(
-                          width: 14.5,
-                        ),
+                        const SizedBox(width: 14.5),
                         Center(
                           child: Stack(
                           children: [
                             CircleAvatar(
                               radius: 17,
                               backgroundImage: NetworkImage(listUser[index].imageUrl),
-                            )
-                            ,
+                            ),
                             if(index == 0)  Positioned(
                               bottom: 0,
                               right: 0,
@@ -135,21 +128,24 @@ final double fontSize = 7;
                                 ),
                               ),
                             )
-
                           ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const SizedBox(width: 10),
+
+                        Expanded(
+                          child: Text(
+                            listUser[index].fullName,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: "Port Lligat Slab"
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        Text(
-                          listUser[index].fullName,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Port Lligat Slab"),
-                        ),
-                       const Spacer(),
+
                         const Icon(
                           Icons.star,
                           color: Colors.amber,

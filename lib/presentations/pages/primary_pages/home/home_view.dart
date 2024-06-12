@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app_pdp/models/quiz_app_model.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_app_bar.dart';
 import 'package:quiz_app_pdp/presentations/pages/primary_pages/home/home_box.dart';
+
+import '../../../../models/quiz_app_data.dart';
 
 class Home extends StatelessWidget {
   final QuizApp quizApp = QuizApp.instance;
@@ -11,7 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: HomeAppBar(),
+      appBar: const HomeAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: GridView.builder(

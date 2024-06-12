@@ -1,9 +1,17 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:quiz_app_pdp/core/utils/phone_number_formatter.dart';
 import 'package:quiz_app_pdp/presentations/widgets/common_button.dart';
 import 'package:quiz_app_pdp/presentations/widgets/common_text_field.dart';
 import 'package:quiz_app_pdp/presentations/widgets/svg_icon.dart';
 
+import '../../../../functions/delete_profile_image_dialog.dart';
+import '../../../../functions/get_image_from_phone.dart';
+import '../../../../functions/profile_custom_modal_bottom_sheet.dart';
+import '../../../../services/sorage_service.dart';
 import '../../../widgets/common_snacbar.dart';
 
 class Profile extends StatefulWidget {
@@ -15,202 +23,234 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   User? user = FirebaseAuth.instance.currentUser;
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late final TextEditingController firstNameController;
+  late final TextEditingController lastNameController;
+  final FocusNode focusNode = FocusNode();
   bool isLoading = false;
-
-
+  String? profileImagePath;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: Padding(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
+              const SizedBox(height: 64),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    width: 110,
+                  Material(
+                    type: MaterialType.transparency,
+                    child: IconButton(
+                      onPressed: (){},
+                      icon: const Icon(Icons.more_vert, color: Colors.transparent),
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                    ),
                   ),
-                  const Column(
-                    children: [
-                      SizedBox(
-                        height: 80,
+                  const Spacer(),
+                  profileImagePath == null ? const SvgIcon(
+                    SvgIcons.profilePageIcon,
+                    width: 109,
+                    height: 109,
+                  ) : CircleAvatar(
+                    radius: 54,
+                    foregroundImage: Image.file(File(profileImagePath!)).image,
+                  ),
+                  const Spacer(),
+                  PopupMenuButton(
+                    color: Colors.white,
+                    surfaceTintColor: Colors.white,
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        onTap: () => profileCustomModalBottomSheet(
+                            context: context,
+                            profileImagePath: profileImagePath,
+                            pressedGallery: () async {
+                              profileImagePath = await getImageFromPhone(context, ImageSource.gallery);
+                              setState(() {});
+                            },
+                            pressedCamera: () async {
+                              profileImagePath = await getImageFromPhone(context, ImageSource.camera);
+                              setState(() {});
+                            },
+                            closeBottomSheetAndOpenDialog: () async {
+                              Navigator.pop(context);
+                              if(await deleteProfileImageDialog(context, profileImagePath!)){
+                                profileImagePath = null;
+                                setState(() {});
+                              }
+                            }
+                        ),
+                        child: const Text("Rasmni o'zgartirish"),
                       ),
-                      SvgIcon(
-                        SvgIcons.profilePageIcon,
-                        width: 109,
-                        height: 109,
+                      if(profileImagePath != null) PopupMenuItem(
+                        onTap: () async {
+                          if(await deleteProfileImageDialog(context, profileImagePath!)){
+                          profileImagePath = null;
+                          setState(() {});
+                          }
+                        },
+                        child: const Text("Rasmni o'chirish"),
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 60,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Transform.translate(
-                        offset: const Offset(20, 0),
-                        child: PopupMenuButton(
-                          color: Colors.white,
-                            itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    child: const Text("Rasm Joylash"),
-                                    onTap: () {},
-                                  ),
-                                  PopupMenuItem(
-                                    child: const Text("Rasmni o'chirish"),
-                                    onTap: () {},
-                                  ),
-                                ]),
-                      )
-                    ],
+                    ]
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               const Center(
                 child: Text(
                   "User Name",
                   style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xff000000),
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Poppins"),
+                    fontSize: 12,
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Poppins"
+                  ),
                 ),
               ),
               Center(
                 child: Text(
-                  "${user?.displayName}",
+                  "${user?.displayName?.replaceAll("/split/", " ")}",
                   style: const TextStyle(
-                      fontSize: 18,
-                      color: Color(0xff000000),
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Poppins"),
+                    fontSize: 18,
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Poppins"
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               const Center(
                 child: Text(
                   "Phone Number",
                   style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xff000000),
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Poppins"),
+                    fontSize: 12,
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Poppins"
+                  ),
                 ),
               ),
               Center(
                 child: Text(
-                  "${user?.phoneNumber}",
+                  "${user?.phoneNumber?.phoneNumberFormat}",
                   style: const TextStyle(
-                      fontSize: 18,
-                      color: Color(0xff000000),
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Poppins"),
+                    fontSize: 18,
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Poppins"
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               const Divider(
                 thickness: 1,
                 color: Color(0xffD9D9D9),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               const Row(
                 children: [
                   Text(
                     "Enter your information \nto make changes",
                     style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff000000)),
+                      fontFamily: "Poppins",
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff000000)
+                    ),
                   )
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Form(
                 key: formKey,
                 child: Column(
                   children: [
-                    CommonTextField(
-                      hintText: "Enter First Name",
-                      labelText: "First Name",
-                      controller: firstNameController,
-                      validator: validator,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    CommonTextField(
-                      hintText: "Enter Last Name",
-                      labelText: "Last Name",
-                      controller: lastNameController,
-                      validator: validator,
-                      textInputAction: TextInputAction.done,
-                    ),
+                      CommonTextField(
+                        hintText: "Enter First Name",
+                        labelText: "First Name",
+                        controller: firstNameController,
+                        validator: validator,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      const SizedBox(height: 30),
+                      CommonTextField(
+                        hintText: "Enter Last Name",
+                        labelText: "Last Name",
+                        controller: lastNameController,
+                        validator: validator,
+                        textInputAction: TextInputAction.done,
+                      ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               CommonButton(
+                text: "Save Changes",
+                isLoading: isLoading,
                 onPressed:  () async {
+                  if(this.user?.displayName == "${firstNameController.text.trim()}/split/${lastNameController.text.trim()}"){
+                    CommonSnackBar(
+                      context: context,
+                      contentText: "O'zgarishlar topilmadi"
+                    );
+                    return;
+                  }
+
                   if(isLoading) return;
                   if(!formKey.currentState!.validate()) return;
+                  final User? user = this.user;
 
-                  final User? user = FirebaseAuth.instance.currentUser;
                   if(user != null){
                     isLoading = true;
                     setState((){});
+
                     try {
                       await user.updateDisplayName("${firstNameController.text.trim()}/split/${lastNameController.text.trim()}");
                       await user.reload();
                     } catch(e) {
-                      if(context.mounted) errorSnackBar(context);
+                      if(context.mounted) {
+                        CommonSnackBar(
+                          context: context,
+                          contentText: "Xatolik yuz berdi"
+                        );
+                      }
                     }
+
                     isLoading = false;
+                    this.user = FirebaseAuth.instance.currentUser;
                     setState((){});
-                    if(context.mounted) successfullySnackBar(context);
-                  } else {
+
+                    if(!context.mounted) return;
+                    CommonSnackBar(
+                      context: context,
+                      contentText: " Ma'lumotlar saqlandi"
+                    );
                   }
                 },
-                text: "Save Changes",
               ),
-              const SizedBox(
-                height: 80,
-              ),
+              const SizedBox(height: 80),
             ],
           ),
-        ));
+        ),
+      )
+    );
   }
-  CommonSnackBar successfullySnackBar(BuildContext context) => CommonSnackBar(
-      context: context,
-      contentText: " Ma'lumotlar saqlandi"
-  );
 
-  CommonSnackBar errorSnackBar(BuildContext context) => CommonSnackBar(
-      context: context,
-      contentText: "Nimadir noto'g'i"
-  );
+  @override
+  void initState() {
+    super.initState();
+    firstNameController = TextEditingController(text: user?.displayName?.split("/split/")[0]);
+    lastNameController = TextEditingController(text: user?.displayName?.split("/split/")[1]);
 
+    profileImagePath = StorageService.get(StorageKey.profileImagePath);
+    setState(() {});
+  }
 
   String? validator(_){
     if(_ == null || _.isEmpty) return "Majburiy maydon";

@@ -19,6 +19,7 @@ class PrimaryState extends State<Primary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Stack(
         alignment: Alignment.bottomCenter,
