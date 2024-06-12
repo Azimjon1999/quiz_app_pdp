@@ -53,10 +53,10 @@ class _SignUpState extends State<SignUp> {
                 children: [
                   CommonTextField(
                     validator: validator,
+                    textInputAction: TextInputAction.next,
                     controller: firstNameController,
                     hintText: "Enter First Name",
                     labelText: "First Name",
-                    textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 20),
                   CommonTextField(
@@ -86,29 +86,23 @@ class _SignUpState extends State<SignUp> {
               onPressed: () async {
                 if(isLoading) return;
                 if(!formKey.currentState!.validate()) return;
-
                 if(!isPrivacyPolicyChecked){
                   isChecking = true;
                   setState((){});
                   return;
                 }
-
                 final User? user = FirebaseAuth.instance.currentUser;
-
                 if(user != null){
                   isLoading = true;
                   setState((){});
-
                   try {
                     await user.updateDisplayName("${firstNameController.text.trim()}/split/${lastNameController.text.trim()}");
                     await user.reload();
                   } catch(e) {
                     if(context.mounted) errorSnackBar(context);
                   }
-
                   isLoading = false;
                   setState((){});
-
                   if(context.mounted) context.go(AppRouterName.primary);
                 } else {
                   errorSnackBar(context);

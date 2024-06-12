@@ -12,7 +12,7 @@ class LevelDetailPage extends StatefulWidget {
 class _LevelDetailPageState extends State<LevelDetailPage> {
   List<UserModel> listUser = UsersModel.users;
 
-
+final double fontSize = 7;
 
   @override
   Widget build(BuildContext context) {
@@ -23,61 +23,114 @@ class _LevelDetailPageState extends State<LevelDetailPage> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 20,),
-          itemCount: listUser.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: Container(
-                color: Color(0xffF5F5F5),
-                height: 46,
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    Text(
-                      "${index + 1}",
-                      style: const TextStyle(
-                          color: Color(0xff000000),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Port Lligat Slab"),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20,),
+        child: Container(
+          color: const Color(0xffF5F5F5),
+          child: ListView.builder(
+              itemCount: listUser.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  child: Container(
+                    color: const Color(0xffF5F5F5),
+                    height: 46,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Text(
+                          "${index + 1}",
+                          style: const TextStyle(
+                              color: Color(0xff000000),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Port Lligat Slab"),
+                        ),
+                        const SizedBox(
+                          width: 14.5,
+                        ),
+                        Center(
+                          child: Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 17,
+                              backgroundImage: NetworkImage(listUser[index].imageUrl),
+                            )
+                            ,
+                            if(index == 0)  Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                radius: 6,
+                                backgroundColor: const Color(0xffF7F7F7),
+                                child: CircleAvatar(
+
+                                  radius: 5,
+                                  backgroundColor: Colors.amber,
+                                  child: Center(child: Text("1",style: TextStyle(color: Colors.white,fontSize: fontSize),)),
+                                ),
+                              ),
+                            )
+                            else if(index == 1)  Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                radius: 6,
+                                backgroundColor: const Color(0xffcec9c9),
+                                child: CircleAvatar(
+                                  radius: 5,
+                                  backgroundColor: const Color(0xffe5d3d3),
+                                  child: Center(child: Text("2",style: TextStyle(color: Colors.white, fontSize: fontSize),)),
+                                ),
+                              ),
+                            )
+                            else if(index == 2)  Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                radius: 6,
+                                backgroundColor: const Color(0xffF7F7F7),
+                                child: CircleAvatar(
+                                  radius: 5,
+                                  backgroundColor: const Color(0xbb9a4f00),
+                                  child: Center(child: Text("3",style: TextStyle(color: Colors.white,fontSize:fontSize),)),
+                                ),
+                              ),
+                            )
+
+                          ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          listUser[index].fullName,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Port Lligat Slab"),
+                        ),
+                       const Spacer(),
+                        const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                          size: 16,
+                        ),
+                        Text(
+                          listUser[index].ball.toString(),
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Port Lligat Slab"),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 14.5,
-                    ),
-                    CircleAvatar(
-                      radius: 17,
-                      backgroundImage: NetworkImage(listUser[index].imageUrl),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      listUser[index].fullName,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Port Lligat Slab"),
-                    ),
-                   Spacer(),
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                      size: 16,
-                    ),
-                    Text(
-                      listUser[index].ball.toString(),
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Port Lligat Slab"),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
+                  ),
+                );
+              }),
+        ),
+      ),
     );
   }
 }
