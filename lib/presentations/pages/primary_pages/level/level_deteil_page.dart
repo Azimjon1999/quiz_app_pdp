@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_pdp/presentations/widgets/svg_icon.dart';
 
 import '../../../../models/user_madel.dart';
 
@@ -10,21 +11,57 @@ class LevelDetailPage extends StatefulWidget {
 }
 
 class _LevelDetailPageState extends State<LevelDetailPage> {
+
+  List<UserModel> sortUsersByBall(List<UserModel> users) {
+    users.sort((a, b) => b.ball.compareTo(a.ball));
+    return users;
+  }
   List<UserModel> listUser = UsersModel.users;
+
+  List<UserModel> sortUsersByBall1(List<UserModel> users) {
+    users.sort((a, b) => b.ball.compareTo(a.ball));
+    return users;
+  }
+  @override
+  void initState() {
+    listUser = sortUsersByBall(listUser);
+    super.initState();
+  }
+
 
 final double fontSize = 7;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Level 1",
-          style: TextStyle(color: Colors.black),
+      backgroundColor: Colors.white,
+      appBar:   AppBar(
+        centerTitle: true,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 40.0), // Yuqori chetni sozlash
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgIcon(SvgIcons.flutter),
+              Text(
+                "Flutter",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    fontFamily: "Poppins"),
+              ),
+            ],
+          ),
         ),
+        backgroundColor: Colors.white,
       ),
+
+
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20,),
+
         child: Container(
           color: const Color(0xffF5F5F5),
           child: ListView.builder(
@@ -37,6 +74,7 @@ final double fontSize = 7;
                     height: 46,
                     width: double.infinity,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           "${index + 1}",
@@ -172,9 +210,5 @@ class UsersModel {
 
 
 
-  // Function to sort list based on specified field
-  void sortUsers(List<UserModel> users, ) {
-    users.sort((a, b) => b.ball.compareTo(a.ball));
 
-  }
 
