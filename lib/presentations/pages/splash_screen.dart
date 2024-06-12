@@ -16,8 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      // context.go(AppRouterName.authChecker);
-      context.go(AppRouterName.primary);
+      context.go(AppRouterName.authChecker);
     });
   }
 
