@@ -1,26 +1,32 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import '../../../../services/sorage_service.dart';
 import '../../../widgets/svg_icon.dart';
 
-// ignore: must_be_immutable
 class LevelAppBar extends StatelessWidget implements PreferredSizeWidget {
   LevelAppBar({super.key});
 
   User? user = FirebaseAuth.instance.currentUser;
 
+
+
+  String? profileImagePath = StorageService.get(StorageKey.profileImagePath);
+
+
   @override
   Widget build(BuildContext context) {
-    return const PreferredSize(
-      preferredSize: Size.fromHeight(120),
+    return  PreferredSize(
+      preferredSize: const Size.fromHeight(120),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
-          padding: EdgeInsets.only(left: 30,right: 30,bottom: 30),
+          padding: const EdgeInsets.only(left: 30,right: 30,bottom: 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              const Expanded(
                 child: Text(
                   "My Level",
                   style: TextStyle(
@@ -36,7 +42,8 @@ class LevelAppBar extends StatelessWidget implements PreferredSizeWidget {
               CircleAvatar(
                 radius: 23,
                 backgroundColor: Colors.transparent,
-                child: SvgIcon(SvgIcons.profile, width: 46, height: 46),
+                foregroundImage: profileImagePath != null ? Image.file(File(profileImagePath!)).image : null,
+                child: profileImagePath == null ? const SvgIcon(SvgIcons.profile, width: 46, height: 46) : null,
               )
             ],
           ),

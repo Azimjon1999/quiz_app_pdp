@@ -1,3 +1,21 @@
+import 'package:quiz_app_pdp/core/constants/svg_icons.dart';
+
+class QuizAppModel {
+  List<Technology> technology;
+
+  QuizAppModel({required this.technology});
+
+  factory QuizAppModel.fromJson(Map<String, dynamic> json) => QuizAppModel(
+      technology: List<Technology>.from(
+          json["technology"].map((e) => Technology.fromJson(e))));
+
+  Map<String, dynamic> get toJson => {
+        "technology": List<dynamic>.from(technology.map((e) => e.toJson))
+      };
+
+
+}
+
 class Technology {
   String name;
   String svgPath;
@@ -123,3 +141,9 @@ class Question {
         option3: option3 ?? this.option3,
       );
 }
+
+
+QuizAppModel  quizAppModel = QuizAppModel(
+    technology: [Technology(name: "Flutter", svgPath: SvgIcons.flutter,
+        levelOfDifficulty: LevelOfDifficulty(easyModules: [], mediumModules: [], hardModules: []))]);
+

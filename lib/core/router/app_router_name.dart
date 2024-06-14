@@ -18,6 +18,7 @@ final class AppRouterName {
   /// level
   static const String level = "/level";
   static const String levelDetail = "levelDetail";
+  static const String levelBox = "levelBox";
 
   /// profile
   static const String profile = "/profile";

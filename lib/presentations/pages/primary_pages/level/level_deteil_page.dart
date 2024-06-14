@@ -1,11 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:quiz_app_pdp/presentations/pages/primary_pages/level/level_deteil_appbar.dart';
 import 'package:quiz_app_pdp/presentations/widgets/svg_icon.dart';
 
 import '../../../../models/user_madel.dart';
 
 class LevelDetailPage extends StatefulWidget {
-  const LevelDetailPage({super.key});
+  final String name;
+  final String svgPath;
+
+  const LevelDetailPage({
+    required this.name,
+    required this.svgPath,
+    super.key
+  });
+
+  factory LevelDetailPage.fromJson(Map<String, dynamic> json) => LevelDetailPage(
+    name: json["name"] as String,
+    svgPath: json["svgPath"] as String,
+  );
 
   @override
   State<LevelDetailPage> createState() => _LevelDetailPageState();
@@ -13,49 +26,22 @@ class LevelDetailPage extends StatefulWidget {
 
 class _LevelDetailPageState extends State<LevelDetailPage> {
 
-  List<UserModel> sortUsersByBall(List<UserModel> users) {
+  List<UserModell> sortUsersByBall(List<UserModell> users) {
     users.sort((a, b) => b.ball.compareTo(a.ball));
     return users;
   }
-  List<UserModel> listUser = UsersModel.users;
-
-  List<UserModel> sortUsersByBall1(List<UserModel> users) {
-    users.sort((a, b) => b.ball.compareTo(a.ball));
-    return users;
-  }
+  List<UserModell> listUser = UsersModel.users;
   @override
   void initState() {
     listUser = sortUsersByBall(listUser);
     super.initState();
   }
-
-
 final double fontSize = 7;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar:   const PreferredSize(
-        preferredSize: Size.fromHeight(150),
-      child: Padding(
-          padding: EdgeInsets.only(top: 40.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgIcon(SvgIcons.flutter),
-              Text(
-                "Flutter",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    fontFamily: "Poppins"),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar:    LevelDetailAppbar(technologyName: widget.name, technologySvgPath:widget.svgPath,),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20,),
         child: Container(
@@ -170,34 +156,34 @@ final double fontSize = 7;
 }
 
 class UsersModel {
-  static List<UserModel> users = <UserModel>[
-    UserModel(
-        fullName: "Azimjon Eshonxojayev",
+  static List<UserModell> users = <UserModell>[
+    UserModell(
+        fullName: "Diyorbek",
         imageUrl:
             "https://t3.ftcdn.net/jpg/03/02/88/46/240_F_302884605_actpipOdPOQHDTnFtp4zg4RtlWzhOASp.jpg",
         ball: 1500),
-    UserModel(
-        fullName: "Azimjon Eshonxojayev",
+    UserModell(
+        fullName: "Shuxratjon ",
         imageUrl:
             "https://t3.ftcdn.net/jpg/03/02/88/46/240_F_302884605_actpipOdPOQHDTnFtp4zg4RtlWzhOASp.jpg",
         ball: 1700),
-    UserModel(
-        fullName: "Azimjon Eshonxojayev",
+    UserModell(
+        fullName: "Azimjon",
         imageUrl:
             "https://t3.ftcdn.net/jpg/03/02/88/46/240_F_302884605_actpipOdPOQHDTnFtp4zg4RtlWzhOASp.jpg",
         ball: 14500),
-    UserModel(
-        fullName: "Azimjon Eshonxojayev",
+    UserModell(
+        fullName: "Nadirber ",
         imageUrl:
             "https://t3.ftcdn.net/jpg/03/02/88/46/240_F_302884605_actpipOdPOQHDTnFtp4zg4RtlWzhOASp.jpg",
         ball: 5500),
-    UserModel(
-        fullName: "Azimjon Eshonxojayev",
+    UserModell(
+        fullName: "Xurshidbek ",
         imageUrl:
             "https://t3.ftcdn.net/jpg/03/02/88/46/240_F_302884605_actpipOdPOQHDTnFtp4zg4RtlWzhOASp.jpg",
         ball: 33500),
-    UserModel(
-        fullName: "Azimjon Eshonxojayev",
+    UserModell(
+        fullName: "Asliddin ",
         imageUrl:
             "https://t3.ftcdn.net/jpg/03/02/88/46/240_F_302884605_actpipOdPOQHDTnFtp4zg4RtlWzhOASp.jpg",
         ball: 100),

@@ -15,6 +15,7 @@ import 'package:quiz_app_pdp/presentations/pages/splash_screen.dart';
 import '../../presentations/pages/auth/register.dart';
 import '../../presentations/pages/primary_pages/home/home_detail/choose_one_steps.dart';
 import '../../presentations/pages/primary_pages/home/home_detail/test_page.dart';
+import '../../presentations/pages/primary_pages/level/level_box.dart';
 
 final class AppRouter {
   static GoRouter router = GoRouter(
@@ -52,9 +53,14 @@ final class AppRouter {
             path: AppRouterName.level,
             builder: (context, state) => const Level(),
             routes: [
+              GoRoute(path: AppRouterName.levelBox,
+                builder: (context, state) =>  LevelBox(
+                    state.extra as Technology,
+                ),
+              ),
               GoRoute(
                   path: AppRouterName.levelDetail,
-                builder: (context,state)=>const LevelDetailPage(),
+                builder: (context,state)=> LevelDetailPage.fromJson(state.extra as Map<String, dynamic>),
               )
             ]
           ),

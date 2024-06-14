@@ -6,6 +6,7 @@ import 'package:quiz_app_pdp/core/utils/extensions.dart';
 import 'package:quiz_app_pdp/models/quiz_app_model.dart';
 import 'package:quiz_app_pdp/presentations/widgets/common_button.dart';
 
+
 import '../../../../widgets/svg_icon.dart';
 
 class ChooseOneSteps extends StatelessWidget {
@@ -91,44 +92,54 @@ class ChooseOneSteps extends StatelessWidget {
               children: [
                 CommonButton(
                   text: "Easy",
-                  onPressed: () => context.push(
-                    AppRouterName.home
-                          .childRoute(AppRouterName.chooseOneSteps)
-                          .childRoute(AppRouterName.homeDetail),
-                    extra: <String, dynamic>{
-                      "name": technology.name,
-                      "svgPath": technology.svgPath,
-                      "modules": technology.levelOfDifficulty.hardModules,
-                    }
-                  ),
+                  onPressed: () {
+
+                    context.push(
+
+                        AppRouterName.home
+                            .childRoute(AppRouterName.chooseOneSteps)
+                            .childRoute(AppRouterName.homeDetail),
+                        extra: <String, dynamic>{
+                          "name": technology.name,
+                          "svgPath": technology.svgPath,
+                          "modules": technology.levelOfDifficulty.hardModules,
+                        }
+                    );
+                  },
                 ),
                 const SizedBox(height: 20),
                 CommonButton(
                   text: "Medium",
-                  onPressed: () => context.push(
-                    AppRouterName.home
-                        .childRoute(AppRouterName.chooseOneSteps)
-                        .childRoute(AppRouterName.homeDetail),
-                    extra: {
-                      "name": technology.name,
-                      "svgPath": technology.svgPath,
-                      "modules": technology.levelOfDifficulty.mediumModules,
-                    }
-                  ),
+                  onPressed: ()async {
+
+                    context.push(
+                        AppRouterName.home
+                            .childRoute(AppRouterName.chooseOneSteps)
+                            .childRoute(AppRouterName.homeDetail),
+                        extra: {
+                          "name": technology.name,
+                          "svgPath": technology.svgPath,
+                          "modules": technology.levelOfDifficulty.mediumModules,
+                        }
+                    );
+                  },
                 ),
                 const SizedBox(height: 20),
                 CommonButton(
                   text: "Hard",
-                  onPressed: () => context.push(
-                    AppRouterName.home
-                        .childRoute(AppRouterName.chooseOneSteps)
-                        .childRoute(AppRouterName.homeDetail),
-                    extra: {
-                      "name": technology.name,
-                      "svgPath": technology.svgPath,
-                      "modules": technology.levelOfDifficulty.hardModules,
-                    }
-                  ),
+                  onPressed: ()async {
+
+                    context.push(
+                        AppRouterName.home
+                            .childRoute(AppRouterName.chooseOneSteps)
+                            .childRoute(AppRouterName.homeDetail),
+                        extra: {
+                          "name": technology.name,
+                          "svgPath": technology.svgPath,
+                          "modules": technology.levelOfDifficulty.hardModules,
+                        }
+                    );
+                  },
                 ),
               ],
             ),

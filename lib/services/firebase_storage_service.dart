@@ -1,31 +1,43 @@
-import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-@immutable
-final class StorageService{
-  static final storage = FirebaseStorage.instance;
+import '../models/user_madel.dart';
 
-  static Future<String> upload({required String path, required File file})async{
-    Reference reference = storage.ref(path).child("${DateTime.now().toLocal().toIso8601String()}${file.path.substring(file.path.lastIndexOf("."))}");
-    UploadTask task = reference.putFile(file);
-    await task.whenComplete((){});
-    return reference.getDownloadURL();
+
+class RealTimeDatabase{
+  static DatabaseReference ref = FirebaseDatabase.instance.ref();
+
+  static Future<void> saveData(UserModell post,String path)async{
+    String? key = ref.child(path).push().key;
+    post.id = key;
+    await ref.child(path).child(post.id! as String).set(post.toJson());
   }
 
-  static Future<List<String>> getData(String path)async{
-    List<String> linkList = [];
-    final Reference reference = storage.ref(path);
-    final ListResult list = await reference.listAll();
-    for (var e in list.items) {
-      linkList.add(await e.getDownloadURL());
+
+
+
+
+  static Future<List<UserModell>> getData(String path)async{
+    List<UserModell> list = [];
+
+    Query query = ref.child(path);
+    DatabaseEvent event = await query.once();
+    Iterable<DataSnapshot> data = event.snapshot.children;
+    for (DataSnapshot e in data) {
+      list.add(UserModell.fromJson(Map<String, dynamic>.from(e.value as Map)));
     }
-    return linkList;
+
+    return list;
   }
 
-  static Future<void> delete(String url)async{
-    final Reference reference = storage.refFromURL(url);
-    await reference.delete();
+  static Future<void> updateData(UserModell post, String main, )async{
+    await ref.child(main).child(post.id!).set(post.toJson());
   }
+
+
+  static Future<void> deletePost(String main,String path)async{
+    await ref.child(main).child(path).remove();
+  }
+
+
 }
